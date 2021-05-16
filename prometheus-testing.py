@@ -1,4 +1,4 @@
-from prometheus_client import make_wsgi_app
+from prometheus_client import make_wsgi_app, Summary
 from wsgiref.simple_server import make_server
 import random
 import time
