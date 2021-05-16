@@ -1,4 +1,5 @@
-from prometheus_client import start_http_server, Summary
+from prometheus_client import make_wsgi_app
+from wsgiref.simple_server import make_server
 import random
 import time
 
@@ -11,9 +12,7 @@ def process_request(t):
     """A dummy function that takes some time."""
     time.sleep(t)
 
-if __name__ == '__main__':
-    # Start up the server to expose the metrics.
-    start_http_server(8000)
-    # Generate some requests.
-    while True:
-        process_request(random.random())
+app = make_wsgi_app()
+httpd = make_server('', 8000, app)
+httpd.serve_forever()
+start_wsgi_server(8000)
